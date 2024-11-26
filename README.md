@@ -1,4 +1,4 @@
-<h1>Tailwind CSS Generator</h1>
+<p align="center">Tailwind CSS Generator</p>
 
 ---
 
