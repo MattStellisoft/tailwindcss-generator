@@ -1,6 +1,6 @@
-<p align="center">Tailwind CSS Generator</p>
+# Tailwind CSS Generator
 
----
+Generate your TailwindCSS output directly in your PHP application.
 
 ## The Problem
 
