@@ -1,4 +1,4 @@
-# Tailwind CSS Generator
+<h1>Tailwind CSS Generator</h1>
 
 ---
 
@@ -10,20 +10,20 @@ Problems arise when moving from development into production, at which point we d
 
 ## The Solution
 
-My solution is to store all of the Tailwind classes in a database table, query the table using the classes that are in use for any given page, then build out the CSS markup using the data. All of the setup/ preflight CSS will be present by default and the generated classes will simply be appended to them. Not only does this solve my problem of dealing with dynamic classes but it also opens up a raft of other potential benefits such as:
+My solution is to store the TailwindCSS classes in a database table, query the table using the classes that are in use for any given page, then build out the CSS markup using the data returned from the query. The generated classes will simply be appended to the preflight CSS. Not only does this solve my problem of dealing with dynamic classes, it also opens up other potential benefits such as:
 
-- The choice to either place the generated classes into a CSS output file that can fetched from the server or to dynamically build the CSS on each request, then either serve it from an endpoint or inject it directly into the webpage. Whilst this wouldn't be optimal in production, it could be useful in development/ testing.
+- The choice to either place the generated classes into a CSS output file that can fetched from the server or to dynamically build the CSS on each request, then either serve it from an endpoint or inject it directly into the webpage. Whilst this certainly wouldn't be optimal in production, it could be useful in development/ testing.
 - Classes can be easily overridden using the query that fetches the classes from the database.
-- Variables can be assigned values dynamically based upon conditions.
+- The core classes can be built upon in an organised fashion, other fields can be added to the table that houses the classes that assist with filtering and assigning classes to various entities such as pages or user profiles.
 
-Although there are some downsides:
+That said, there are some perceived downsides:
 
 - The database table containing class definitions will need to be maintained and kept up-to-date with the latest version of TailwindCSS.
-- You lose ability to customise the configuration through Tailwind CLI
+- You lose ability to customise your configuration using Tailwind CLI
 
 ## User Guide
 
-- Run the generate-tailwind-sql.php script using the command `php generate-tailwind-sql.php`. This will generate the insert query and put it in a file named tailwind-insert.sql.
+- Run the generate-tailwind-sql.php script using the command `php generate-tailwind-sql.php`. This will generate the insert query and place it in a file named tailwind-insert.sql.
 - Create a table in your database and make sure it has a name field (VARCHAR), to store the classname a rule field (VARCHAR), to store any rules that may apply to the selector and a data column (JSON), to store the styles that apply to the class.
 - Execute the tailwind-insert.sql query using the CLI or your DBMS to populate the table's name and data fields.
 - Create a method in your application that performs the steps needed to generate the CSS as shown in the laravel-example.php file.
