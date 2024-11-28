@@ -13,7 +13,8 @@ Problems arise when moving from development into production, at which point we d
 Why not store the TailwindCSS classes, extract the classes that are in use for any given page, then build out the CSS markup using the data? The generated classes will simply be appended to the preflight styles at which point we can pipe the resulting output into a file or embed it directly in a webpage. Not only does this solve my problem of handling dynamic classes, it also creates other potential benefits such as:
 
 - You have the choice to either place the generated classes into a CSS file that can fetched from the server or to dynamically build the CSS on each request, then either serve it from an endpoint or inject it directly into the webpage. Whilst this certainly wouldn't be optimal in production, it could be useful in development/ testing.
-- If you choose to store the classes in a database, this creates options such as allowing for multi-tenancy. Classes can be easily overridden and/ or filtered using queries. This includes classes that exist as plugins such as the Typography classes. If they exist in the database, they can be appended to the output file in the same way as the core classes.
+- If you choose to store the classes in a database, this creates options such as allowing for multi-tenancy. Classes can be easily overridden and/ or filtered using queries. 
+- Classes found in plugins (such as the Typography) can be appended to the output file in exactly same way as the core classes.
 
 ## User Guide
 
