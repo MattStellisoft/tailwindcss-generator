@@ -47,7 +47,7 @@ class TailwindGenerator {
             //Build an array that links the classnames to their corresponding style data
             $this->classStyles[$class['name']] = $class['data'];
 
-            //Build an array containing clases for any plugins that have been used
+            //Build an array containing classes for any plugins that have been used
             if ($class['name'] == 'prose') {
                 $this->proseClasses = Style::where('category', 'prose')->get();
             }
