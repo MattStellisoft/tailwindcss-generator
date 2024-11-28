@@ -5,7 +5,7 @@ $json = file_get_contents('tailwind-classes.json');
 $classes = json_decode($json, true);
 
 // Start the INSERT query
-$query = "INSERT INTO tailwind_classes (name, rule, data) VALUES\n";
+$query = "INSERT INTO styles (name, category, rule, data) VALUES\n";
 
 // Build values for each class
 $values = [];
@@ -16,8 +16,13 @@ foreach ($classes as $class) {
     } else {
         $rule = null;
     }
+    if (!empty($class['category'])) {
+        $category = $class['category'];
+    } else {
+        $category = null;
+    }
     $data = json_encode($class['data'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    $values[] = "('$name', '$rule', '$data')";
+    $values[] = "('$name', '$category', '$rule', '$data')";
 }
 
 // Combine values and complete the query
