@@ -15,11 +15,6 @@ Why not store the TailwindCSS classes, extract the classes that are in use for a
 - The choice to either place the generated classes into a CSS output file that can fetched from the server or to dynamically build the CSS on each request, then either serve it from an endpoint or inject it directly into the webpage. Whilst this certainly wouldn't be optimal in production, it could be useful in development/ testing.
 - If you choose to store the classes in a database, they can be easily overridden using the query that fetches the classes from the database. This includes styles that exist as plugins such as Typography classes as they exist in the database and can be added to the output file no differently from the core styles. Additional fields can be used to assist with filtering and assigning classes based upon pages or user profiles.
 
-That said, there are some downsides:
-
-- The database table containing class definitions will need to be manually maintained and kept up-to-date with the latest version of TailwindCSS.
-- You lose ability to customise your configuration using Tailwind CLI.
-
 ## User Guide
 
 ### Using JSON
