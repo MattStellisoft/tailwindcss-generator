@@ -1,6 +1,6 @@
 # Tailwind CSS Generator
 
-Generate TailwindCSS classes dynamically from within your PHP application.
+Generate TailwindCSS classes dynamically from within your application.
 
 ## The Problem
 
@@ -10,12 +10,10 @@ Problems arise when moving from development into production, at which point we d
 
 ## My Solution
 
-Why not store the TailwindCSS classes in a database table, query the table using the classes that are in use for any given page, then build out the CSS markup using the data returned from the query? The generated classes will simply be appended to the preflight styles at which point we can pipe the resulting output into a file or embed it directly in a webpage. Not only does this solve my problem of handling dynamic classes, it also creates other potential benefits such as:
+Why not store the TailwindCSS classes, extract the classes that are in use for any given page, then build out the CSS markup using the data? The generated classes will simply be appended to the preflight styles at which point we can pipe the resulting output into a file or embed it directly in a webpage. Not only does this solve my problem of handling dynamic classes, it also creates other potential benefits such as:
 
 - The choice to either place the generated classes into a CSS output file that can fetched from the server or to dynamically build the CSS on each request, then either serve it from an endpoint or inject it directly into the webpage. Whilst this certainly wouldn't be optimal in production, it could be useful in development/ testing.
-- Classes can be easily overridden using the query that fetches the classes from the database. This includes styles that exist as plugins such as Typography classes as they exist in the database and can be added to the output file no differently from the core styles.
-- The core classes can be built upon in an organised fashion. 
-- Additional fields can be used to assist with filtering and assigning classes based upon pages or user profiles.
+- If you choose to store the classes in a database, they can be easily overridden using the query that fetches the classes from the database. This includes styles that exist as plugins such as Typography classes as they exist in the database and can be added to the output file no differently from the core styles. Additional fields can be used to assist with filtering and assigning classes based upon pages or user profiles.
 
 That said, there are some downsides:
 
@@ -23,6 +21,13 @@ That said, there are some downsides:
 - You lose ability to customise your configuration using Tailwind CLI.
 
 ## User Guide
+
+### Using JSON
+
+- Get the contents of `tailwind-classes.json` and decode it as JSON in your application.
+- Create a method in your application that performs the steps needed to generate the CSS as demonstrated in the laravel-example.php file.
+
+### Using a Database
 
 - Create a table in your database (in the example code it's named `tailwind-classes`) and make sure it has a name field (VARCHAR) to store the classname; A rule field (VARCHAR) to store any rules that may apply to the selector; A category field (VARCHAR) used to group classes by category and a data field (JSON), to store the styles that apply to a given class.
 - Run the generate-tailwind-sql.php script using the command `php generate-tailwind-sql.php`. This will generate the insert query and place it in a current directory as `tailwind-insert.sql`.
