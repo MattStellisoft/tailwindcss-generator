@@ -2,13 +2,13 @@
 
 Generate TailwindCSS classes dynamically from within your application.
 
-## The Problem
+## Problem
 
-I oversee [Stellify](https://stellisoft.com), a web development platform that allows users to build and serve Laravel applications in the cloud. The platform allows users to style their interfaces using regular CSS however we also promote using the popular TailwindCSS utility-first framework. When users are working on development using the editor, I see no problem in making use of the CDN to import the TailwindCSS classes, all of which would be required so that the user has the freedom style their interface as they wish.
+I oversee [Stellify](https://stellisoft.com), a web development (IDE) platform that allows users to build and serve Laravel applications in the cloud. The platform allows users to style their interfaces using regular CSS however, due to its popularity, we also promote using TailwindCSS. When using the development environment, we use the CDN to import the TailwindCSS classes. That said, when moving from development into production, we don't want to use the CDN due its bundle size and the resulting latency. 
 
-Problems arise when moving from development into production, at which point we don't want to use the CDN due its bundle size and the resulting latency. Ordinarily, Tailwind's build step would scan the templates in your project path to determine the classes that are in use in order to produce a much smaller static CSS file. The snag is, Stellify doesn't generate files. What it does is construct interfaces from JSON that gets stored in a database, meaning there are no files for the Tailwind CLI to scan. There is an existing workaround for dealing with dynamic classes that involves using a script utilising PostCSS [see here](https://github.com/tailwindlabs/tailwindcss/discussions/14636#discussioncomment-10895673). Unfortunately, that's not going to work for Stellify as it also involves multi-tenancy, however it did give me an idea.
+Stellify doesn't generate files and is multi-tenancy. What it does is creates JSON configuration that gets stored in a database against a project identifier, meaning there are no files for the Tailwind CLI to scan, neither is there a directory to store generated files for each project. So although there is an existing workaround for dealing with dynamic classes, one that involves using a script utilising PostCSS [see here](https://github.com/tailwindlabs/tailwindcss/discussions/14636#discussioncomment-10895673), unfortunately, that's not going to work for Stellify.
 
-## My Solution
+## Solution
 
 Why not store the TailwindCSS classes, extract the classes that are in use for any given page, then build out the CSS markup using the data? The generated classes will simply be appended to the preflight styles at which point we can pipe the resulting output into a file or embed it directly in a webpage. Not only does this solve my problem of handling dynamic classes, it also creates other potential benefits such as:
 
