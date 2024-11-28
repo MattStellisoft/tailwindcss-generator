@@ -25,7 +25,7 @@ Why not store the TailwindCSS classes, extract the classes that are in use for a
 
 ### Using a Database
 
-- Create a table in your database (in the example code it's named `tailwind-classes`) and make sure it has a name field (VARCHAR) to store the classname; A rule field (VARCHAR) to store any rules that may apply to the selector; A category field (VARCHAR) used to group classes by category and a data field (JSON), to store the styles that apply to a given class.
+- Create a table in your database (in the example code it's named `tailwind-classes`) and make sure it has a `name` field (VARCHAR) to store the classname; A `rule` field (VARCHAR) to store any rules that may apply to the selector; A `category` field (VARCHAR) used to group classes by category and a `data` field (JSON), to store the styles that apply to a given class.
 - Run the generate-tailwind-sql.php script using the command `php generate-tailwind-sql.php`. This will generate the insert query and place it in a current directory as `tailwind-insert.sql`.
 - Execute the tailwind-insert.sql query using your CLI\ DBMS to populate the `tailwind-classes` table (be sure to escape backslashes).
 - Create a method in your application that performs the steps needed to generate the CSS as demonstrated in the laravel-example.php file.

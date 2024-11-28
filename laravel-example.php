@@ -6,6 +6,7 @@ class TailwindGenerator {
     public $activeClasses;
     public $categorizedClasses;
     public $proseClasses;
+    public $breakpoints;
     public $rules;
     public $css;
     
@@ -38,26 +39,21 @@ class TailwindGenerator {
         }
         $classes = TailwindClasses::where('category', '')->whereIn('name', $this->classes)->get();
         foreach($classes as $class) {
-            /**
-             * Build an array containing rules
-             */
+            //Build an array containing rules
             if (!empty($class['rule'])) {
                 $this->rules[$class['name']] = $class['rule'];
             }
-            /**
-             * Build an array that links the classnames to their corresponding style data
-             */
+
+            //Build an array that links the classnames to their corresponding style data
             $this->classStyles[$class['name']] = $class['data'];
-            /**
-             * Build an array containing clases for any plugins that have been used
-             */
+
+            //Build an array containing clases for any plugins that have been used
             if ($class['name'] == 'prose') {
                 $this->proseClasses = Style::where('category', 'prose')->get();
             }
         }
-        /**
-         * Build the css by iterating over the categorizedClasses array 
-         */
+
+        //Build the css by iterating over the categorizedClasses array 
         foreach($this->categorizedClasses as $breakpointName => $breakpoint) {
             if ($breakpointName == 'sm:' && !empty($breakpoint)) {
                 $this->css .= ' @media (min-width: 640px) {';
@@ -113,10 +109,6 @@ class TailwindGenerator {
         }
         return $this->css;
 
-        /**
-         * or place the css in a file file_put_contents(base_path() . '/output.css', $query);
-         */
-
-
+        //or place the css in a file file_put_contents(base_path() . '/tailwind.css', $query);
     }
 }
